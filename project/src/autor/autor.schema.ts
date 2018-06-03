@@ -18,17 +18,15 @@ export const AUTOR_SCHEMA = Joi
         fechaNacimiento: Joi
             .string()
             .required()
-            .regex(/^[0-9]{3,30}$/)
-            .min(3)
-            .max(30),
+            .regex(/^([0][1-9]|[12][0-9]|3[01])(\/|-)([0][1-9]|[1][0-2])\2(\d{4})$/),
         numeroLibros: Joi
             .number()
             .required()
             .integer()
-            .greater(18)
+            .greater(0)
             .less(40),
         ecuatoriano: Joi
-            .boolean()
-            .required(),
+            .boolean(),
+            //.required(),
 
     })
