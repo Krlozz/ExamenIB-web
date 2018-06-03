@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Post, Req, Res} from "@nestjs/common";
+import {Body, Controller, Get, Param, Post, Req, Res} from "@nestjs/common";
 import {AutorService} from "./autor.service";
 import {AutorPipe} from "./autor.pipe";
 import {AUTOR_SCHEMA} from "./autor.schema";
@@ -24,6 +24,13 @@ export class AutorController {
     mostrarAutores(@Res() res) {
         const autores = this._autorService.listarTodos();
         return res.status(202).send(autores);
+    }
+
+    @Get(':id')
+    obtenerUno(@Param(AUTOR_SCHEMA.apellidos) apellido,
+               @Req() req,
+               @Res() res) {
+        return res.send(apellido);
     }
 
 }
