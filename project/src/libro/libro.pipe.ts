@@ -1,8 +1,8 @@
-import {ArgumentMetadata, BadRequestException, Injectable, PipeTransform} from "@nestjs/common";
+import {ArgumentMetadata, BadRequestException, Injectable, NotFoundException, PipeTransform} from "@nestjs/common";
 import * as Joi from 'joi';
 
 @Injectable()
-export class AutorPipe implements PipeTransform{
+export class LibroPipe implements PipeTransform{
 
     constructor(private readonly _schema) {}
 
@@ -14,10 +14,10 @@ export class AutorPipe implements PipeTransform{
 
 
         if (error) {
-            throw new BadRequestException({
-                statusCode: 400,
-                //error: error,
-                mensaje: 'Solicitud incorrecta, datos incorrectos'
+            throw new NotFoundException({
+                statusCode: 404,
+                error: error,
+                mensaje: 'No se encontró ICBN'
             })
         }
         return valorEnBrutoDelRequest;

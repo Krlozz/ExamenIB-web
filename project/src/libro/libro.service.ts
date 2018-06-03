@@ -16,7 +16,7 @@ export class LibroService {
 
     obtenerUno(icbn:number){
         return this.arregloLibros.filter((Libro:LibroClass)=>{
-                return (Libro.ICBN === icbn)
+                return (Libro.icbn === icbn)
             }
         );
     }

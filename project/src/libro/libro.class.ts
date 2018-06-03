@@ -1,5 +1,5 @@
 export class LibroClass {
-    constructor(public ICBN:number,
+    constructor(public icbn:number,
                 public nombre:string,
                 public numeroPaginas:number,
                 public edicion:number,
