@@ -18,7 +18,7 @@ export const AUTOR_SCHEMA = Joi
         fechaNacimiento: Joi
             .string()
             .required()
-            .regex(/^[a-zA-Z]{3,30}$/)
+            .regex(/^[0-9]{3,30}$/)
             .min(3)
             .max(30),
         numeroLibros: Joi

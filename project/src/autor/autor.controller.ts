@@ -11,7 +11,7 @@ export class AutorController {
 
     }
 
-    @Post('nuevo')
+    @Post()
     crearUsuario(@Body(new AutorPipe(AUTOR_SCHEMA)) creaUsuario,
                  @Req() req,
                  @Res() res){
