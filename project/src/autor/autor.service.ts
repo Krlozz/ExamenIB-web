@@ -14,12 +14,12 @@ export class AutorService {
         return this.arregloAutores;
     }
 
-    obtenerUno(apellidoAutor:string){
+    /**obtenerUno(apellidoAutor:string){
         return this.arregloAutores.filter((Autor:AutorClass)=>{
                 return (Autor.apellidos === apellidoAutor)
             }
         );
-    }
+    }*/
 
 
 

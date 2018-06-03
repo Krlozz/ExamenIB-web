@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Param, Post, Req, Res} from "@nestjs/common";
+import {Body, Controller, Get, Param, Post, Put, Req, Res} from "@nestjs/common";
 import {AutorService} from "./autor.service";
 import {AutorPipe} from "./autor.pipe";
 import {AUTOR_SCHEMA} from "./autor.schema";
@@ -26,11 +26,19 @@ export class AutorController {
         return res.status(202).send(autores);
     }
 
-    @Get(':id')
+    @Get('/:id')
     obtenerUno(@Param(AUTOR_SCHEMA.apellidos) apellido,
                @Req() req,
                @Res() res) {
         return res.send(apellido);
+    }
+
+    @Put('/:id')
+    editarUno(@Param(AUTOR_SCHEMA.apellidos) apellido,
+              @Body(new AutorPipe(AUTOR_SCHEMA)) editar,
+              @Req() req,
+              @Res() res) {
+        return res.send(editar);
     }
 
 }
