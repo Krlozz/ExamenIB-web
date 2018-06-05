@@ -22,6 +22,13 @@ export class AutorService {
         return autor;
     }
 
-
-
+    editarUno(apellidosAutor, nombres, apellidos, fechaNacimiento, numeroLibros, ecuatoriano) {
+        let editar = this.obtenerUno(apellidosAutor);
+        editar.nombres = nombres;
+        editar.apellidos = apellidos;
+        editar.fechaNacimiento = fechaNacimiento;
+        editar.numeroLibros = numeroLibros;
+        editar.ecuatoriano = ecuatoriano;
+        return editar;
+    };
 }

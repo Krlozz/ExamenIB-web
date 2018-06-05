@@ -53,12 +53,35 @@ export class AutorController {
     }
     
     // falta editar
-    @Put(':id')
+    /*@Put(':id')
     editarUno(@Param(AUTOR_SCHEMA.apellidos) apellido,
               @Body(new AutorPipe(AUTOR_SCHEMA)) editar,
               @Req() req,
               @Res() res) {
         return res.send(editar);
+    }*/
+
+
+    @Put(':id')
+    editarUno(@Param() id,
+              @Body() updateAutor,
+              @Req() req,
+              @Res() res) {
+        const update = this._autorService.editarUno(id.id,
+            updateAutor.nombres,
+            updateAutor.apellidos,
+            updateAutor.fechaNacimiento,
+            updateAutor.numeroLibros,
+            updateAutor.ecuatoriano);
+        if (update) {
+            return res.status(200).send(update);
+        } else {
+            throw  new NotFoundException(
+                'Apellido no encontrado',
+                'No se encuentra en esta lista',
+                10
+            )
+        }
     }
 
 }
