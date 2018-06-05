@@ -1,26 +1,35 @@
-import {ArgumentMetadata, BadRequestException, Injectable, NotFoundException, PipeTransform} from "@nestjs/common";
+import {ArgumentMetadata, Injectable, PipeTransform} from "@nestjs/common";
 import * as Joi from 'joi';
+import {BadRequestException} from "../exception/badRequest.exception";
+import {NotFoundException} from "../exception/notFound.exception";
 
 @Injectable()
 export class LibroPipe implements PipeTransform{
 
     constructor(private readonly _schema) {}
 
-    transform(valorEnBrutoDelRequest: any, metadataDeLosDecoradoresDelNestjs: ArgumentMetadata) {
-
-        const {error
-        }= Joi.validate(valorEnBrutoDelRequest    // objeto a validar
-            ,this._schema);                         // un esquema
-
+    transform(jsonAValidar: any, metadata: ArgumentMetadata) {
+        const {error}
+            = Joi.validate(jsonAValidar, this._schema);
+        const {errorNotFound}
+            = Joi.validate(jsonAValidar, this._schema);
 
         if (error) {
-            throw new NotFoundException({
-                statusCode: 404,
-                error: error,
-                mensaje: 'No se encontró ICBN'
-            })
+            throw new BadRequestException(
+                'Petición Inválida',
+                error,
+                10
+            )
         }
-        return valorEnBrutoDelRequest;
-
+        if (errorNotFound) {
+            throw  new NotFoundException(
+                'No encontrado',
+                errorNotFound,
+                10
+            )
+        }
+        else {
+            return jsonAValidar;
+        }
     }
 }

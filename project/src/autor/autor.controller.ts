@@ -1,25 +1,32 @@
-import {Body, Controller, Get, Param, Post, Put, Req, Res} from "@nestjs/common";
+import {Body, Controller, Get, Param, Post, Put, Req, Res, UsePipes} from "@nestjs/common";
 import {AutorService} from "./autor.service";
 import {AutorPipe} from "./autor.pipe";
 import {AUTOR_SCHEMA} from "./autor.schema";
 import {error} from "util";
 import {NotFoundException} from "../exception/notFound.exception";
+import {BadRequestException} from "../exception/badRequest.exception";
 
 
 @Controller('Autor')
 export class AutorController {
 
-    constructor(private _autorService:AutorService) {
+    constructor(private _autorService:AutorService) {}
 
-    }
-
+    @UsePipes(new AutorPipe(AUTOR_SCHEMA))
     @Post()
     crearAutor(@Body(new AutorPipe(AUTOR_SCHEMA)) creaAutor,
                  @Req() req,
                  @Res() res){
         const nuevo = this._autorService.crearAutor(creaAutor);
-        return creaAutor;
-
+        if (nuevo) {
+            return creaAutor;
+        } else {
+            throw new BadRequestException(
+                'Petición Inválida',
+                'Ingreso de datos incorrectos o datos insuficientes',
+                10
+            )
+        }
     }
 
     @Get()
@@ -44,8 +51,9 @@ export class AutorController {
             )
         }
     }
-
-    @Put('/:id')
+    
+    // falta editar
+    @Put(':id')
     editarUno(@Param(AUTOR_SCHEMA.apellidos) apellido,
               @Body(new AutorPipe(AUTOR_SCHEMA)) editar,
               @Req() req,
