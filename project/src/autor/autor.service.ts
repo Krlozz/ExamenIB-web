@@ -14,13 +14,6 @@ export class AutorService {
         return this.arregloAutores;
     }
 
-    /**obtenerUno(apellidoAutor:string){
-        return this.arregloAutores.filter((Autor:AutorClass)=>{
-                return (Autor.apellidos === apellidoAutor)
-            }
-        );
-    }*/
-
     obtenerUno(apellidoAutor:string){
         const autor = this.arregloAutores.find(function (element:AutorClass) {
             return element.apellidos === apellidoAutor;

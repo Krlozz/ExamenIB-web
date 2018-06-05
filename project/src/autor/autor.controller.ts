@@ -25,7 +25,7 @@ export class AutorController {
     @Get()
     mostrarAutores(@Res() res) {
         const autores = this._autorService.listarTodos();
-        return res.status(202).send(autores);
+        return res.status(200).send(autores);
     }
 
     @Get(':id')
@@ -34,17 +34,15 @@ export class AutorController {
                @Res() res) {
         const autor = this._autorService.obtenerUno(id.id);
         if (autor) {
-            return res.send(autor);
+            return res.status(200).send(autor);
         }
         else {
             throw  new NotFoundException(
                 'Apellido no encontrado',
-                id + 'No se encuentra en esta lista',
+                'No se encuentra en esta lista',
                 10
             )
         }
-
-
     }
 
     @Put('/:id')

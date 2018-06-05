@@ -1,5 +1,6 @@
 import {Component} from "@nestjs/common/utils/decorators/component.decorator";
 import {LibroClass} from "./libro.class";
+import {AutorClass} from "../autor/autor.class";
 
 @Component()
 export class LibroService {
@@ -15,10 +16,11 @@ export class LibroService {
     }
 
     obtenerUno(icbn:number){
-        return this.arregloLibros.filter((Libro:LibroClass)=>{
-                return (Libro.icbn === icbn)
-            }
-        );
+        const libro = this.arregloLibros.find(function (element:LibroClass) {
+            return element.icbn === icbn;
+        });
+
+        return libro;
     }
 
 
