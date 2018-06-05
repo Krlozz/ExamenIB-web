@@ -2,7 +2,6 @@ import {Body, Controller, Get, Param, Post, Put, Req, Res, UsePipes} from "@nest
 import {AutorService} from "./autor.service";
 import {AutorPipe} from "./autor.pipe";
 import {AUTOR_SCHEMA} from "./autor.schema";
-import {error} from "util";
 import {NotFoundException} from "../exception/notFound.exception";
 import {BadRequestException} from "../exception/badRequest.exception";
 
@@ -51,17 +50,8 @@ export class AutorController {
             )
         }
     }
-    
-    // falta editar
-    /*@Put(':id')
-    editarUno(@Param(AUTOR_SCHEMA.apellidos) apellido,
-              @Body(new AutorPipe(AUTOR_SCHEMA)) editar,
-              @Req() req,
-              @Res() res) {
-        return res.send(editar);
-    }*/
 
-
+    @UsePipes(new AutorPipe(AUTOR_SCHEMA))
     @Put(':id')
     editarUno(@Param() id,
               @Body() updateAutor,
