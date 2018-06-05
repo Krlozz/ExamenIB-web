@@ -2,6 +2,8 @@ import {Body, Controller, Get, Param, Post, Put, Req, Res} from "@nestjs/common"
 import {AutorService} from "./autor.service";
 import {AutorPipe} from "./autor.pipe";
 import {AUTOR_SCHEMA} from "./autor.schema";
+import {error} from "util";
+import {NotFoundException} from "../exception/notFound.exception";
 
 
 @Controller('Autor')
@@ -26,11 +28,23 @@ export class AutorController {
         return res.status(202).send(autores);
     }
 
-    @Get('/:id')
-    obtenerUno(@Param(AUTOR_SCHEMA.apellidos) apellido,
+    @Get(':id')
+    obtenerUno(@Param() id,
                @Req() req,
                @Res() res) {
-        return res.send(apellido);
+        const autor = this._autorService.obtenerUno(id.id);
+        if (autor) {
+            return res.send(autor);
+        }
+        else {
+            throw  new NotFoundException(
+                'Apellido no encontrado',
+                id + 'No se encuentra en esta lista',
+                10
+            )
+        }
+
+
     }
 
     @Put('/:id')

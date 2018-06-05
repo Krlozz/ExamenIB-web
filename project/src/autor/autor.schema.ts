@@ -24,7 +24,7 @@ export const AUTOR_SCHEMA = Joi
             .required()
             .integer()
             .greater(0)
-            .less(40),
+            .less(200),
         ecuatoriano: Joi
             .boolean(),
             //.required(),

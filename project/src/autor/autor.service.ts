@@ -5,12 +5,12 @@ import {Component} from "@nestjs/common/utils/decorators/component.decorator";
 export class AutorService {
     arregloAutores: AutorClass [] =[];
 
-    crearAutor(autor:AutorClass){
+    crearAutor(autor:AutorClass): AutorClass[]{
         this.arregloAutores.push(autor);
         return this.arregloAutores;
     }
 
-    listarTodos(){
+    listarTodos(): AutorClass[]{
         return this.arregloAutores;
     }
 
@@ -21,6 +21,13 @@ export class AutorService {
         );
     }*/
 
+    obtenerUno(apellidoAutor:string){
+        const autor = this.arregloAutores.find(function (element:AutorClass) {
+            return element.apellidos === apellidoAutor;
+        });
+
+        return autor;
+    }
 
 
 

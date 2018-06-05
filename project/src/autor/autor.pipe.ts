@@ -16,7 +16,7 @@ export class AutorPipe implements PipeTransform{
         if (error) {
             throw new BadRequestException({
                 statusCode: 400,
-                //error: error,
+                error: error,
                 mensaje: 'Solicitud incorrecta, datos incorrectos'
             })
         }
