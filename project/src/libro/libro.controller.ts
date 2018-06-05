@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Param, Post, Req, Res, UsePipes} from "@nestjs/common";
+import {Body, Controller, Get, Param, Post, Put, Req, Res, UsePipes} from "@nestjs/common";
 import {LibroService} from "./libro.service";
 import {LIBRO_SCHEMA} from "./libro.schema";
 import {LibroPipe} from "./libro.pipe";
@@ -51,11 +51,30 @@ export class LibroController {
         }
     }
 
-
-
-
-
-
+    //@UsePipes(new LibroPipe(LIBRO_SCHEMA))
+    @Put(':id')
+    editarUno(@Param() id,
+              @Body() updateLibro,
+              @Req() req,
+              @Res() res) {
+        const update = this._libroService.editarUno(id.id,
+            updateLibro.icbn,
+            updateLibro.nombre,
+            updateLibro.numeroPaginas,
+            updateLibro.edicion,
+            updateLibro.fechaPublicacion,
+            updateLibro.nombreEditorial,
+            updateLibro.autorID);
+        if (update) {
+            return res.status(200).send(update);
+        } else {
+            throw  new NotFoundException(
+                'Libro no encontrado',
+                'No se encuentra en esta lista',
+                10
+            )
+        }
+    }
 
 
 }

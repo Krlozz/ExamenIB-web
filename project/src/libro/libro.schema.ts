@@ -10,7 +10,7 @@ export const LIBRO_SCHEMA = Joi
         nombre: Joi
             .string()
             .required()
-            .regex(/^[a-zA-Z0-9]{3,30}$/)
+            .regex(/^[a-zA-Z]{3,30}$/)
             .min(3)
             .max(30),
         numeroPaginas: Joi

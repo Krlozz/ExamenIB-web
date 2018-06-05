@@ -51,7 +51,7 @@ export class AutorController {
         }
     }
 
-    @UsePipes(new AutorPipe(AUTOR_SCHEMA))
+    //@UsePipes(new AutorPipe(AUTOR_SCHEMA))
     @Put(':id')
     editarUno(@Param() id,
               @Body() updateAutor,

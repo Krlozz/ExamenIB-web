@@ -23,7 +23,7 @@ export class AutorService {
     }
 
     editarUno(apellidosAutor, nombres, apellidos, fechaNacimiento, numeroLibros, ecuatoriano) {
-        let editar = this.obtenerUno(apellidosAutor);
+        const editar = this.obtenerUno(apellidosAutor);
         editar.nombres = nombres;
         editar.apellidos = apellidos;
         editar.fechaNacimiento = fechaNacimiento;

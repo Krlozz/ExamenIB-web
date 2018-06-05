@@ -23,7 +23,17 @@ export class LibroService {
         return libro;
     }
 
-
+    editarUno(icbnLibro, icbn, nombre, numeroPaginas, edicion, fechaPublicacion, nombreEditorial, autorID) {
+        const editar = this.obtenerUno(icbnLibro);
+        editar.icbn = icbn;
+        editar.nombre = nombre;
+        editar.numeroPaginas = numeroPaginas;
+        editar.edicion = edicion;
+        editar.fechaPublicacion = fechaPublicacion;
+        editar.nombreEditorial = nombreEditorial;
+        editar.autorID = autorID;
+        return editar;
+    };
 
 
 }
